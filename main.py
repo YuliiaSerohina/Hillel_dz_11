@@ -14,7 +14,7 @@ def count_lucky_tickets():
             sum_right = sum(map(int, str(right)))
             if sum_left == sum_right:
                 lucky.append(ticket)
-    return lucky
+    return print(len(lucky))
 
 
 def count_lucky_tickets2():
@@ -27,7 +27,7 @@ def count_lucky_tickets2():
             sum_right = sum(map(int, str(right)))
             if sum_left == sum_right:
                 lucky2.append(ticket)
-    return lucky2
+    return print(len(lucky2))
 
 
 def count_lucky_tickets3():
@@ -40,7 +40,7 @@ def count_lucky_tickets3():
             sum_right = sum(map(int, str(right)))
             if sum_left == sum_right:
                 lucky3.append(ticket)
-    return lucky3
+    return print(len(lucky3))
 
 
 if __name__ == '__main__':
