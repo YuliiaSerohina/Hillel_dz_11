@@ -1,57 +1,25 @@
-from multiprocessing import Process
+from multiprocessing import Pool
 
 
-tickets = [x for x in range(1000, 1000000)]
+num_list = [567890, 1000000]
 
 
-def count_lucky_tickets():
-    lucky = []
-    for ticket in tickets:
-        if len(str(ticket)) == 4:
-            left = str(ticket)[0]
-            right = str(ticket)[1:]
-            sum_left = sum(map(int, str(left)))
-            sum_right = sum(map(int, str(right)))
-            if sum_left == sum_right:
-                lucky.append(ticket)
-    return print(len(lucky))
-
-
-def count_lucky_tickets2():
-    lucky2 = []
-    for ticket in tickets:
-        if len(str(ticket)) == 5:
-            left = str(ticket)[:2]
-            right = str(ticket)[2:]
-            sum_left = sum(map(int, str(left)))
-            sum_right = sum(map(int, str(right)))
-            if sum_left == sum_right:
-                lucky2.append(ticket)
-    return print(len(lucky2))
-
-
-def count_lucky_tickets3():
-    lucky3 = []
-    for ticket in tickets:
-        if len(str(ticket)) == 6:
-            left = str(ticket)[:3]
-            right = str(ticket)[3:]
-            sum_left = sum(map(int, str(left)))
-            sum_right = sum(map(int, str(right)))
-            if sum_left == sum_right:
-                lucky3.append(ticket)
-    return print(len(lucky3))
+def count_lucky_tickets(i):
+    tickets_list = [str(n).zfill(6) for n in range(1, i)]
+    lucky_tickets = []
+    for ticket in tickets_list:
+        left = ticket[:3]
+        right = ticket[3:]
+        sum_left = sum(map(int, str(left)))
+        sum_right = sum(map(int, str(right)))
+        if sum_left == sum_right:
+            lucky_tickets.append(ticket)
+    return print(len(lucky_tickets))
 
 
 if __name__ == '__main__':
-    foo1 = Process(target=count_lucky_tickets)
-    foo2 = Process(target=count_lucky_tickets2)
-    foo3 = Process(target=count_lucky_tickets3)
-    foo1.start()
-    foo2.start()
-    foo3.start()
-    foo1.join()
-    foo2.join()
-    foo3.join()
+    p = Pool(2)
+    print(p.map(count_lucky_tickets, num_list))
+
 
 
